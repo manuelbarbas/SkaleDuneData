@@ -5,8 +5,7 @@ dotenv.config();
 
 const skale_stats_endpoint = process.env.SKALE_ENDPOINT;
 
-const queries_ids = [3235318,3237360,3238173,3237389,3237392,3237393,3237477,3238185,3237548,3237551,3237535,3278560,3280420,3280409,3280258,3280186,3407028,3407521,3407181,3407532,3278525];
-
+//const queries_ids = [3235318,3237360,3238173,3237389,3237392,3237393,3237477,3238185,3237548,3237551,3237535,3278560,3280420,3280409,3280258,3280186,3407028,3407521,3407181,3407532,3278525];
 
 async function skaleData() {
     try {
@@ -17,16 +16,15 @@ async function skaleData() {
       }
 }
 
-
 function sChainFormatMonthlyData(schain_data:any):[string[], string[]] {
     const namesArray: string[] = [];
     const formattedStringsArray: string[] = [];
-    var formattedStrings = schains_data_fields ;
 
     for(const key in schain_data) {
         namesArray.push(key);
         
         const groupByMonth = schain_data[key].group_by_month;
+        var formattedStrings = schains_data_fields ;
 
         for (const month in groupByMonth) {
             if (groupByMonth.hasOwnProperty(month)  && month != "1970-01") {
@@ -78,4 +76,4 @@ function sChainFormatTotalData(schain_data:any):[string[], string[]] {
 }
 
 
-export {skaleData, queries_ids, sChainFormatMonthlyData, sChainFormat30DayData, sChainFormatTotalData}
+export {skaleData, sChainFormatMonthlyData, sChainFormat30DayData, sChainFormatTotalData}

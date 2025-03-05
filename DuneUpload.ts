@@ -1,4 +1,4 @@
-import { skaleData, sChainFormatMonthlyData, sChainFormat30DayData,sChainFormatTotalData, DuneTables, queries_ids } from "./Data/index";
+import { skaleData, sChainFormatMonthlyData, sChainFormat30DayData,sChainFormatTotalData, DuneTables } from "./Data/index";
 import axios from "axios";
 import dotenv from "dotenv";
 
@@ -80,16 +80,6 @@ async function DuneUpload_Total_Data(skale_data: any) {
 
 
 /**
- * Runs Dune queries to update data.
- */
-/*async function Update_Dune_Queries(start_index: number = 0) {
-    for (let i = start_index; i < queries_ids.length; i++) {
-        const target_endpoint = `${dune_base_url}${queries_ids[i]}/execute`;
-        await makeApiRequest(target_endpoint, {}, () => Update_Dune_Queries(i));
-    }
-}*/
-
-/**
  * Main function to call all Dune upload operations.
  */
 async function Calls() {
@@ -97,8 +87,6 @@ async function Calls() {
     await DuneUpload_Months_Data(skale_data);
     await DuneUpload_30d_Data(skale_data);
     await DuneUpload_Total_Data(skale_data);
-   // await Update_Dune_Queries();
-
 }
 
 Calls();
