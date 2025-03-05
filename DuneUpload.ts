@@ -6,7 +6,7 @@ dotenv.config();
 
 const dune_api_key = process.env.API_KEY!;
 const dune_endpoint = process.env.DUNE_UPLOAD_ENDPOINT!;
-const dune_base_url = process.env.DUNE_QUERY_ENDPOINT;
+const skale_stats_endpoint = process.env.SKALE_ENDPOINT!;
 const headers = { "X-Dune-Api-Key": dune_api_key };
 
 /**
@@ -83,7 +83,7 @@ async function DuneUpload_Total_Data(skale_data: any) {
  * Main function to call all Dune upload operations.
  */
 async function Calls() {
-    const skale_data = await skaleData();
+    const skale_data = await skaleData(skale_stats_endpoint);
     await DuneUpload_Months_Data(skale_data);
     await DuneUpload_30d_Data(skale_data);
     await DuneUpload_Total_Data(skale_data);

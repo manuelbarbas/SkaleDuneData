@@ -3,13 +3,9 @@ import axios from 'axios';
 import dotenv from 'dotenv'; 
 dotenv.config();
 
-const skale_stats_endpoint = process.env.SKALE_ENDPOINT;
-
-//const queries_ids = [3235318,3237360,3238173,3237389,3237392,3237393,3237477,3238185,3237548,3237551,3237535,3278560,3280420,3280409,3280258,3280186,3407028,3407521,3407181,3407532,3278525];
-
-async function skaleData() {
+async function skaleData(skale_stats_endpoint:string) {
     try {
-        const response = await axios.get(skale_stats_endpoint!);
+        const response = await axios.get(skale_stats_endpoint);
         return response.data.payload.schains;
       } catch (error) {
         console.error(error);
