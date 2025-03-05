@@ -1,0 +1,31 @@
+name: Dune Upload Job
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Runs every day at 00:00 UTC
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  upload-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Adjust based on your Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Compile TypeScript
+        run: npx tsc  # Compiles TypeScript to JavaScript
+
+      - name: Run Dune Upload Script
+        run: node dist/DuneUpload.js  # Ensure your compiled file is in dist/
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          DUNE_UPLOAD_ENDPOINT: ${{ secrets.DUNE_UPLOAD_ENDPOINT }}
+          SKALE_ENDPOINT: ${{ secrets.SKALE_ENDPOINT }}
